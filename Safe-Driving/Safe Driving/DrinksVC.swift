@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class DrinksVC: UIViewController {
   
@@ -17,15 +18,17 @@ class DrinksVC: UIViewController {
   @IBOutlet weak var drinkName: UITextField!
   @IBOutlet weak var drinkVolume: UITextField!
   
-  var alcCont: Float = Float()
-  var volume: Float = Float()
-  var totalVolume: Float = Float()
-  var drinks:Int = Int()
+  var drink = String()
+  var alcCont = Float()
+  var volume = Float()
+  var totalVolume = Float()
+  var drinks = Int()
+  var drinkData = [NSManagedObject]()
   
   //from profile
-  var age:Int = Int()
-  var weight:Int = Int()
-  var gender:String = String()
+  var age = Int()
+  var weight = Int()
+  var gender = String()
   
   override func viewDidLoad() {
     
@@ -44,9 +47,17 @@ class DrinksVC: UIViewController {
         alcCont = alcPerc
       } else {
         //notify user to enter a number
+        let alert = UIAlertController(title: "Alert", message: "Please enter a number in Alcohol %", preferredStyle: .Alert)
+        let dismissAction = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+        alert.addAction(dismissAction)
+        presentViewController(alert, animated: true, completion: nil)
       }
     } else {
       //alert user to enter a number
+      let alert = UIAlertController(title: "Alert", message: "Please enter a number in Alcohol %", preferredStyle: .Alert)
+      let dismissAction = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+      alert.addAction(dismissAction)
+      presentViewController(alert, animated: true, completion: nil)
     }
     
     if let vol = drinkVolume.text{
@@ -55,9 +66,26 @@ class DrinksVC: UIViewController {
         totalVolume = howManyDrinks.value * volume
       } else {
         //alert user to enter a number
+        let alert = UIAlertController(title: "Alert", message: "Please enter a number in oz per drink", preferredStyle: .Alert)
+        let dismissAction = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+        alert.addAction(dismissAction)
+        presentViewController(alert, animated: true, completion: nil)
       }
     } else {
       //alert user to enter a number
+      let alert = UIAlertController(title: "Alert", message: "Please enter a number in oz per drink", preferredStyle: .Alert)
+      let dismissAction = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+      alert.addAction(dismissAction)
+      presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    if let drinkNm = drinkName.text {
+      drink = drinkNm
+    } else {
+      let alert = UIAlertController(title: "Alert", message: "Please enter a name for your drink", preferredStyle: .Alert)
+      let dismissAction = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+      alert.addAction(dismissAction)
+      presentViewController(alert, animated: true, completion: nil)
     }
     
   }
@@ -66,6 +94,26 @@ class DrinksVC: UIViewController {
     drinks = Int(howManyDrinks.value)
     totalDrinks.text = "\(drinks)"
   }
+  
+  func drinkCD(name: String, alcCont: Float, volume: Float){
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let managedContext = appDelegate.managedObjectContext
+    let entity =  NSEntityDescription.entityForName("Drink", inManagedObjectContext:managedContext)
+    let newDrink = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+    
+    newDrink.setValue(name, forKey: "name")
+    newDrink.setValue(alcCont, forKey: "alcoholPercent")
+    newDrink.setValue(volume, forKey: "volume")
+    
+    do {
+      try managedContext.save()
+      drinkData.append(newDrink)
+    } catch let error as NSError  {
+      print("Could not save \(error), \(error.userInfo)")
+    }
+  }
+  
+  
   /*
    // MARK: - Navigation
    

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
   
@@ -15,10 +16,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
   @IBOutlet weak var ageText: UITextField!
   @IBOutlet weak var genderSelection: UIPickerView!
   
-  var pickerData: [String] = [String]()
+  var pickerData = [String]()
   var currentAge = Int()
   var currentWeight = Int()
   var gender = String()
+  var name = String()
+  var profileData = [NSManagedObject]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -59,19 +62,54 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         currentWeight = weight
       } else {
         //alert to enter an Int
+        let alert = UIAlertController(title: "Alert", message: "Please enter a number in weight", preferredStyle: .Alert)
+        let dismissAction = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+        alert.addAction(dismissAction)
+        presentViewController(alert, animated: true, completion: nil)
       }
     } else {
       // alert user to enter Weight
+      let alert = UIAlertController(title: "Alert", message: "Please enter a number in weight", preferredStyle: .Alert)
+      let dismissAction = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+      alert.addAction(dismissAction)
+      presentViewController(alert, animated: true, completion: nil)
     }
     if let ageString = ageText.text{
       if let age = Int(ageString){
         currentAge = age
       } else {
         //alert to enter an Int
+        let alert = UIAlertController(title: "Alert", message: "Please enter a number in age", preferredStyle: .Alert)
+        let dismissAction = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+        alert.addAction(dismissAction)
+        presentViewController(alert, animated: true, completion: nil)
       }
       
     } else {
       //alert user to enter age
+      let alert = UIAlertController(title: "Alert", message: "Please enter a number in age", preferredStyle: .Alert)
+      let dismissAction = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+      alert.addAction(dismissAction)
+      presentViewController(alert, animated: true, completion: nil)
+    }
+    profileCD(name, age: Float(currentAge), weight: Float(currentWeight), gender: gender)
+  }
+  
+  func profileCD(name: String, age: Float, weight: Float, gender: String){
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let managedContext = appDelegate.managedObjectContext
+    let entity =  NSEntityDescription.entityForName("Profile", inManagedObjectContext:managedContext)
+    let newProfile = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+    
+    newProfile.setValue(name, forKey: "name")
+    newProfile.setValue(weight, forKey: "weight")
+    newProfile.setValue(age, forKey: "age")
+    newProfile.setValue(gender, forKey: "gender")
+    do {
+      try managedContext.save()
+      profileData.append(newProfile)
+    } catch let error as NSError  {
+      print("Could not save \(error), \(error.userInfo)")
     }
   }
 }
