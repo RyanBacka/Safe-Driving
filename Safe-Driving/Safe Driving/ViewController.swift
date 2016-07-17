@@ -12,6 +12,7 @@ import CoreData
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
   
   
+  
   @IBOutlet weak var weightText: UITextField!
   @IBOutlet weak var ageText: UITextField!
   @IBOutlet weak var genderSelection: UIPickerView!
@@ -40,26 +41,32 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     // Dispose of any resources that can be recreated.
   }
   
+  // sets components in PickerView
   func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
     return 1
   }
   
+  //sets rows in pickerView
   func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
     return pickerData.count
   }
   
+  //sets atributes for pickerView
   func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
     let titleData = pickerData[row]
     let myTitle = NSAttributedString(string: titleData, attributes: [NSForegroundColorAttributeName:UIColor.grayColor()])
     return myTitle
   }
   
+  //returns selection of pickerView
   func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
     return pickerData[row]
   }
   
+  // adds alerts and sets values once the user is done entering information
   @IBAction func doneButton(sender: AnyObject) {
     if let userWeight = weightText.text{
+      print("here")
       if let weight = Int(userWeight){
         currentWeight = weight
       } else {
@@ -97,6 +104,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     profileCD(name, age: Float(currentAge), weight: Float(currentWeight), gender: gender)
   }
   
+  //assigns values to coreData for later use
   func profileCD(name: String, age: Float, weight: Float, gender: String){
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let managedContext = appDelegate.managedObjectContext
@@ -115,6 +123,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
   }
   
+  // sets the inital alert 
   func initialAlert(){
     let alert = UIAlertController(title: "Alert", message: "This application to intended to help keep track of your BAC. It is not 100% accurate and has no legal standing. Don't drink and Drive!", preferredStyle: .Alert)
     let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)

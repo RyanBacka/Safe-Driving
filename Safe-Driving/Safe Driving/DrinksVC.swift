@@ -90,11 +90,13 @@ class DrinksVC: UIViewController {
     
   }
   
+  // sets value of label based on the slider
   @IBAction func drinkSlider(sender: UISlider) {
     drinks = Int(howManyDrinks.value)
     totalDrinks.text = "\(drinks)"
   }
   
+  // sets new drink in coreData
   func drinkCD(name: String, alcCont: Float, volume: Float){
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let managedContext = appDelegate.managedObjectContext
