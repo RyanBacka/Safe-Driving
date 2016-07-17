@@ -31,6 +31,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     self.genderSelection.dataSource = self
     
     pickerData = ["Male", "Female"]
+    
+    initialAlert()
   }
   
   override func didReceiveMemoryWarning() {
@@ -111,6 +113,13 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     } catch let error as NSError  {
       print("Could not save \(error), \(error.userInfo)")
     }
+  }
+  
+  func initialAlert(){
+    let alert = UIAlertController(title: "Alert", message: "This application to intended to help keep track of your BAC. It is not 100% accurate and has no legal standing. Don't drink and Drive!", preferredStyle: .Alert)
+    let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+    alert.addAction(okAction)
+    presentViewController(alert, animated: true, completion: nil)
   }
 }
 

@@ -18,10 +18,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jiv-T6-U0P">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jiv-T6-U0P">
                                 <rect key="frame" x="9" y="28" width="582" height="564"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Profile" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QRW-kF-RCn">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Profile" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QRW-kF-RCn">
                                         <rect key="frame" x="216" y="8" width="151" height="36"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -30,7 +30,7 @@
                                             <rect key="frame" x="117" y="8" width="151" height="36"/>
                                         </variation>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZJX-3I-tfw">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZJX-3I-tfw" userLabel="Name Text">
                                         <rect key="frame" x="184" y="162" width="214" height="30"/>
                                         <color key="backgroundColor" red="0.74117647058823533" green="0.82352941176470584" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" red="0.49411764705882355" green="0.49411764705882355" blue="0.55686274509803924" alpha="1" colorSpace="calibratedRGB"/>
@@ -74,19 +74,19 @@
                                             </mask>
                                         </variation>
                                     </textField>
-                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nkm-lZ-UN1">
-                                        <rect key="frame" x="0.0" y="-216" width="320" height="216"/>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1gd-8S-YSB">
+                                        <rect key="frame" x="8" y="162" width="582" height="216"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="70.5" id="W9j-DP-0GX"/>
+                                            <constraint firstAttribute="height" constant="73" id="Xah-Mo-aQ0"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="W9j-DP-0GX"/>
+                                                <exclude reference="Xah-Mo-aQ0"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="constraints">
-                                                <include reference="W9j-DP-0GX"/>
+                                                <include reference="Xah-Mo-aQ0"/>
                                             </mask>
                                         </variation>
                                     </pickerView>
@@ -137,22 +137,6 @@
                                             <segue destination="Qa0-Qe-bTI" kind="presentation" id="ulM-JI-ZdP"/>
                                         </connections>
                                     </button>
-                                    <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1gd-8S-YSB">
-                                        <rect key="frame" x="8" y="162" width="582" height="216"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="73" id="Xah-Mo-aQ0"/>
-                                        </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="Xah-Mo-aQ0"/>
-                                            </mask>
-                                        </variation>
-                                        <variation key="heightClass=regular-widthClass=compact">
-                                            <mask key="constraints">
-                                                <include reference="Xah-Mo-aQ0"/>
-                                            </mask>
-                                        </variation>
-                                    </pickerView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.72549019607843135" green="0.74509803921568629" blue="0.6470588235294118" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -173,19 +157,21 @@
                                     <constraint firstItem="TTp-iN-NGv" firstAttribute="width" secondItem="ZJX-3I-tfw" secondAttribute="width" id="k7C-5c-nPC"/>
                                     <constraint firstItem="TTp-iN-NGv" firstAttribute="centerY" secondItem="jiv-T6-U0P" secondAttribute="centerY" multiplier="0.75" id="oM7-zr-uLr"/>
                                     <constraint firstItem="TTp-iN-NGv" firstAttribute="centerX" secondItem="ZJX-3I-tfw" secondAttribute="centerX" id="rd4-WO-Twh"/>
-                                    <constraint firstItem="QRW-kF-RCn" firstAttribute="top" secondItem="nkm-lZ-UN1" secondAttribute="bottom" constant="8" id="tPP-Hb-yPY"/>
                                     <constraint firstItem="1gd-8S-YSB" firstAttribute="centerY" secondItem="jiv-T6-U0P" secondAttribute="centerY" multiplier="0.9" id="vBl-kh-uZW"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
-                                        <exclude reference="nkm-lZ-UN1"/>
-                                        <exclude reference="WgW-4D-3xG"/>
                                         <exclude reference="1gd-8S-YSB"/>
+                                        <exclude reference="WgW-4D-3xG"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <exclude reference="9IK-YW-mvf"/>
+                                        <exclude reference="Xye-vC-65c"/>
+                                        <exclude reference="e0i-Qh-MeL"/>
+                                        <exclude reference="e1f-rl-49Y"/>
+                                        <exclude reference="vBl-kh-uZW"/>
                                         <exclude reference="BmG-Rw-FQy"/>
                                         <exclude reference="W8p-8Q-olV"/>
-                                        <exclude reference="tPP-Hb-yPY"/>
                                         <exclude reference="Ks2-qc-gob"/>
                                         <exclude reference="PTa-jm-elW"/>
                                         <exclude reference="h1x-I6-z5t"/>
@@ -193,28 +179,26 @@
                                         <exclude reference="k7C-5c-nPC"/>
                                         <exclude reference="oM7-zr-uLr"/>
                                         <exclude reference="rd4-WO-Twh"/>
-                                        <exclude reference="e0i-Qh-MeL"/>
-                                        <exclude reference="e1f-rl-49Y"/>
-                                        <exclude reference="vBl-kh-uZW"/>
                                         <exclude reference="6Gz-zW-c35"/>
                                         <exclude reference="8bV-wG-WCq"/>
                                         <exclude reference="Ei6-K6-Wwp"/>
                                         <exclude reference="aU6-BC-sAo"/>
-                                        <exclude reference="9IK-YW-mvf"/>
-                                        <exclude reference="Xye-vC-65c"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="8" y="18" width="384" height="764"/>
                                     <mask key="subviews">
-                                        <include reference="nkm-lZ-UN1"/>
-                                        <include reference="WgW-4D-3xG"/>
                                         <include reference="1gd-8S-YSB"/>
+                                        <include reference="WgW-4D-3xG"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <include reference="9IK-YW-mvf"/>
+                                        <include reference="Xye-vC-65c"/>
+                                        <include reference="e0i-Qh-MeL"/>
+                                        <include reference="e1f-rl-49Y"/>
+                                        <include reference="vBl-kh-uZW"/>
                                         <include reference="BmG-Rw-FQy"/>
                                         <include reference="W8p-8Q-olV"/>
-                                        <include reference="tPP-Hb-yPY"/>
                                         <include reference="Ks2-qc-gob"/>
                                         <include reference="PTa-jm-elW"/>
                                         <include reference="h1x-I6-z5t"/>
@@ -222,15 +206,10 @@
                                         <include reference="k7C-5c-nPC"/>
                                         <include reference="oM7-zr-uLr"/>
                                         <include reference="rd4-WO-Twh"/>
-                                        <include reference="e0i-Qh-MeL"/>
-                                        <include reference="e1f-rl-49Y"/>
-                                        <include reference="vBl-kh-uZW"/>
                                         <include reference="6Gz-zW-c35"/>
                                         <include reference="8bV-wG-WCq"/>
                                         <include reference="Ei6-K6-Wwp"/>
                                         <include reference="aU6-BC-sAo"/>
-                                        <include reference="9IK-YW-mvf"/>
-                                        <include reference="Xye-vC-65c"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -309,6 +288,35 @@
                                             </mask>
                                         </variation>
                                     </textField>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="30" translatesAutoresizingMaskIntoConstraints="NO" id="PtJ-9b-wv0">
+                                        <rect key="frame" x="0.0" y="-15" width="118" height="31"/>
+                                        <color key="minimumTrackTintColor" red="0.4941176471" green="0.4941176471" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="thumbTintColor" red="0.88235294117647056" green="0.82745098039215681" blue="0.71372549019607845" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="drinkSlider:" destination="Qa0-Qe-bTI" eventType="valueChanged" id="B74-Mv-kEi"/>
+                                        </connections>
+                                    </slider>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cR1-8a-6EZ">
+                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="10.5" id="ybV-h4-PfB">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="40"/>
+                                            </constraint>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="ybV-h4-PfB"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="ybV-h4-PfB"/>
+                                            </mask>
+                                        </variation>
+                                    </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="% Alcohol" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y7F-RX-XLk">
                                         <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                         <color key="backgroundColor" red="0.74117647060000003" green="0.82352941180000006" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
@@ -327,6 +335,12 @@
                                                 <include reference="z2i-Z5-n8x"/>
                                             </mask>
                                         </variation>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="oz. per drink" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q2J-SC-Yt4">
+                                        <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                        <color key="backgroundColor" red="0.74117647060000003" green="0.82352941180000006" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ob7-Gs-PrS">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -355,41 +369,6 @@
                                             <action selector="saveDrink:" destination="Qa0-Qe-bTI" eventType="touchUpInside" id="MI2-No-XrR"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="oz. per drink" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q2J-SC-Yt4">
-                                        <rect key="frame" x="-25" y="-30" width="97" height="30"/>
-                                        <color key="backgroundColor" red="0.74117647060000003" green="0.82352941180000006" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
-                                    </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cR1-8a-6EZ">
-                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="10.5" id="ybV-h4-PfB">
-                                                <variation key="heightClass=regular-widthClass=compact" constant="40"/>
-                                            </constraint>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="ybV-h4-PfB"/>
-                                            </mask>
-                                        </variation>
-                                        <variation key="heightClass=regular-widthClass=compact">
-                                            <mask key="constraints">
-                                                <include reference="ybV-h4-PfB"/>
-                                            </mask>
-                                        </variation>
-                                    </label>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="30" translatesAutoresizingMaskIntoConstraints="NO" id="PtJ-9b-wv0">
-                                        <rect key="frame" x="0.0" y="-15" width="118" height="31"/>
-                                        <color key="minimumTrackTintColor" red="0.4941176471" green="0.4941176471" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="thumbTintColor" red="0.88235294117647056" green="0.82745098039215681" blue="0.71372549019607845" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <action selector="drinkSlider:" destination="Qa0-Qe-bTI" eventType="valueChanged" id="B74-Mv-kEi"/>
-                                        </connections>
-                                    </slider>
                                 </subviews>
                                 <color key="backgroundColor" red="0.72549019609999998" green="0.74509803919999995" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -417,11 +396,11 @@
                                 <variation key="default">
                                     <mask key="subviews">
                                         <exclude reference="MD2-fb-Sds"/>
-                                        <exclude reference="Y7F-RX-XLk"/>
-                                        <exclude reference="ob7-Gs-PrS"/>
-                                        <exclude reference="q2J-SC-Yt4"/>
-                                        <exclude reference="cR1-8a-6EZ"/>
                                         <exclude reference="PtJ-9b-wv0"/>
+                                        <exclude reference="cR1-8a-6EZ"/>
+                                        <exclude reference="Y7F-RX-XLk"/>
+                                        <exclude reference="q2J-SC-Yt4"/>
+                                        <exclude reference="ob7-Gs-PrS"/>
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="AjC-cu-IzA"/>
@@ -449,11 +428,11 @@
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="MD2-fb-Sds"/>
-                                        <include reference="Y7F-RX-XLk"/>
-                                        <include reference="ob7-Gs-PrS"/>
-                                        <include reference="q2J-SC-Yt4"/>
-                                        <include reference="cR1-8a-6EZ"/>
                                         <include reference="PtJ-9b-wv0"/>
+                                        <include reference="cR1-8a-6EZ"/>
+                                        <include reference="Y7F-RX-XLk"/>
+                                        <include reference="q2J-SC-Yt4"/>
+                                        <include reference="ob7-Gs-PrS"/>
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="AjC-cu-IzA"/>
