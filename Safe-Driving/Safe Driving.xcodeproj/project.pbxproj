@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C2ECA091D3E7528005420BB /* WidmarkFormulaHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2ECA081D3E7528005420BB /* WidmarkFormulaHelper.swift */; };
+		2C2ECA0D1D3E82E5005420BB /* ForecastVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2ECA0C1D3E82E5005420BB /* ForecastVC.swift */; };
 		2C76E5FA1D244A1400A59D61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76E5F91D244A1400A59D61 /* AppDelegate.swift */; };
 		2C76E5FC1D244A1400A59D61 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76E5FB1D244A1400A59D61 /* ViewController.swift */; };
 		2C76E5FF1D244A1400A59D61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C76E5FD1D244A1400A59D61 /* Main.storyboard */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C2ECA081D3E7528005420BB /* WidmarkFormulaHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidmarkFormulaHelper.swift; sourceTree = "<group>"; };
+		2C2ECA0C1D3E82E5005420BB /* ForecastVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForecastVC.swift; path = ../ForecastVC.swift; sourceTree = "<group>"; };
 		2C76E5F61D244A1400A59D61 /* Safe Driving.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Safe Driving.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C76E5F91D244A1400A59D61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C76E5FB1D244A1400A59D61 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -103,9 +107,11 @@
 			isa = PBXGroup;
 			children = (
 				2CA747481D33C39300AF87A9 /* Safe Driving.entitlements */,
+				2C2ECA081D3E7528005420BB /* WidmarkFormulaHelper.swift */,
 				2C76E5F91D244A1400A59D61 /* AppDelegate.swift */,
 				2C76E5FB1D244A1400A59D61 /* ViewController.swift */,
 				2CA747491D33CA7A00AF87A9 /* DrinksVC.swift */,
+				2C2ECA0C1D3E82E5005420BB /* ForecastVC.swift */,
 				2C76E5FD1D244A1400A59D61 /* Main.storyboard */,
 				2C76E6031D244A1500A59D61 /* Assets.xcassets */,
 				2C76E6051D244A1500A59D61 /* LaunchScreen.storyboard */,
@@ -276,6 +282,8 @@
 				2C76E5FC1D244A1400A59D61 /* ViewController.swift in Sources */,
 				2CA7474A1D33CA7A00AF87A9 /* DrinksVC.swift in Sources */,
 				2C76E5FA1D244A1400A59D61 /* AppDelegate.swift in Sources */,
+				2C2ECA0D1D3E82E5005420BB /* ForecastVC.swift in Sources */,
+				2C2ECA091D3E7528005420BB /* WidmarkFormulaHelper.swift in Sources */,
 				2C76E6021D244A1400A59D61 /* Safe_Driving.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
