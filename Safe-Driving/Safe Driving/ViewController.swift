@@ -27,7 +27,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
-    
+    let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+    UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
     self.genderSelection.delegate = self
     self.genderSelection.dataSource = self
     

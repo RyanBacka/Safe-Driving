@@ -12,19 +12,18 @@ import CoreData
 class BACVC: UIViewController {
   
   @IBOutlet weak var BACLabel: UILabel!
-  @IBOutlet weak var legalHours: UILabel!
-  @IBOutlet weak var legalMinutes: UILabel!
-  @IBOutlet weak var soberHours: UILabel!
-  @IBOutlet weak var soberMInutes: UILabel!
+  @IBOutlet weak var legalTimerLabel: UILabel!
+  @IBOutlet weak var soberTimerLabel: UILabel!
+  
   
   var drinkData = [NSManagedObject]()
   var profileData = [NSManagedObject]()
   var soberTimer = NSTimer()
   var legalTimer = NSTimer()
-  var soberHour = Int()
-  var soberMinute = Int()
-  var legalHour = Int()
-  var legalMinute = Int()
+  var soberHours = Double()
+  var legalHours = Double()
+  var soberTimeEnd = NSDate()
+  var legalTimeEnd = NSDate()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -62,95 +61,76 @@ class BACVC: UIViewController {
   
   func calcBAC(drinkData : [NSManagedObject], profileData: [NSManagedObject]){
     
-    let bodyAC = WidmarkHelper.calculate(4.2, drinkVolume: 36, gender: "male", bodyWeight: 320)
+    let bodyAC = WidmarkHelper.calculate(4.2, drinkVolume: 1, gender: "male", bodyWeight: 320)
     let BAC = bodyAC - 0.00025
     if BAC >= 0.00{
       BACLabel.text = "\(BAC)"
-      let hourDecimal = BAC / 0.015
-      soberHour = Int(hourDecimal)
-      let minutesDecimal = hourDecimal - Float(soberHour)
-      soberMinute = Int(minutesDecimal * 60)
+      soberHours = Double(BAC / 0.015)
+      /*soberHour = Int(hourDecimal)
+       let minutesDecimal = hourDecimal - Float(soberHour)
+       soberMinute = Int(minutesDecimal * 60)*/
       updateSoberTime()
-      if soberHour == 1 {
-        soberHours.text = "\(soberHour) Hour"
-      } else {
-        soberHours.text = "\(soberHour) Hours"
-      }
-      soberMInutes.text = "\(soberMinute) Minutes"
     } else if BAC >= 0.08 {
       let legalBAC = BAC - 0.08
-      let hourDecimal = legalBAC / 0.015
-      legalHour = Int(hourDecimal)
-      let minutesDecimal = hourDecimal - Float(legalHour)
-      legalMinute = Int(minutesDecimal * 60)
-      legalTimer = NSTimer.scheduledTimerWithTimeInterval(60.0, target: self, selector: #selector(BACVC.subtractLegalTime), userInfo: nil, repeats: true)
-      if legalHour == 1 {
-        legalHours.text = "\(legalHour) Hour"
-      } else {
-        legalHours.text = "\(legalHour) Hours"
-      }
-      legalMinutes.text = "\(legalMinute) Minutes"
+      legalHours = Double(legalBAC / 0.015)
+      /*legalHour = Int(hourDecimal)
+       let minutesDecimal = hourDecimal - Float(legalHour)
+       legalMinute = Int(minutesDecimal * 60)*/
+      updateLegalTime()
     }
   }
   
   func updateSoberTime(){
+    soberTimeEnd = NSDate(timeInterval: soberHours*60*60, sinceDate: NSDate())
     subtractSoberTime()
-    soberTimer = NSTimer.scheduledTimerWithTimeInterval(60.0, target: self, selector: #selector(BACVC.subtractSoberTime), userInfo: nil, repeats: true)
+    soberTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(BACVC.subtractSoberTime), userInfo: nil, repeats: true)
+  }
+  
+  func updateLegalTime(){
+    legalTimeEnd = NSDate(timeInterval:legalHours*60*60, sinceDate: NSDate())
+    subtractLegalTime()
+    legalTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(BACVC.subtractLegalTime), userInfo: nil, repeats: true)
   }
   
   func subtractSoberTime(){
-    if soberMinute > 0 {
-      soberMinute = soberMinute - 1
-      if soberHour == 1 {
-        soberHours.text = "\(soberHour) Hour"
-      } else {
-        soberHours.text = "\(soberHour) Hours"
-      }
-      soberMInutes.text = "\(soberMinute) Minutes"
-    } else if soberMinute == 0 {
-      soberMinute = 59
-      soberHour = soberHour - 1
-      if soberHour == 1 {
-        soberHours.text = "\(soberHour) Hour"
-      } else {
-        soberHours.text = "\(soberHour) Hours"
-      }
-      soberMInutes.text = "\(soberMinute) Minutes"
-    }
-    if soberHour == 0 && soberMinute == 0{
-      if soberHour == 1 {
-        soberHours.text = "\(soberHour) Hour"
-      } else {
-        soberHours.text = "\(soberHour) Hours"
-      }
-      soberMInutes.text = "\(soberMinute) Minutes"
-      soberTimer.invalidate()
+    let timeNow = NSDate()
+    if soberTimeEnd.compare(timeNow) == NSComparisonResult.OrderedDescending{
+      let calendar = NSCalendar.currentCalendar()
+      let components = calendar.components([.Hour, .Minute, .Second], fromDate: timeNow, toDate: soberTimeEnd, options: [])
+      
+      let hourText  = String(components.hour)
+      let minuteText = String(components.minute)
+      let notification = UILocalNotification()
+      notification.fireDate = NSDate(timeIntervalSinceNow: soberHours*60*60)
+      notification.alertBody = "You should now be sober"
+      notification.alertAction = "unlock"
+      notification.soundName = UILocalNotificationDefaultSoundName
+      notification.userInfo = ["CustomField1": "w00t"]
+      UIApplication.sharedApplication().scheduleLocalNotification(notification)
+      soberTimerLabel.text = hourText + " Hours " + minuteText + " Minutes "
+    } else {
+      soberTimerLabel.text = "0 Hours 0 Minutes"
     }
   }
   
   func subtractLegalTime(){
-    if legalMinute > 0 {
-      legalMinute = legalMinute - 1
-      if legalHour == 1 {
-        legalHours.text = "\(legalHour) Hour"
-      } else {
-        legalHours.text = "\(legalHour) Hours"
-      }
-      legalMinutes.text = "\(legalMinute) Minutes"
-    } else if legalMinute == 0 {
-      legalMinute = 59
-      legalHour = legalHour - 1
-      if legalHour == 1 {
-        legalHours.text = "\(legalHour) Hour"
-      } else {
-        legalHours.text = "\(legalHour) Hours"
-      }
-      legalMinutes.text = "\(legalMinute) Minutes"
-    }
-    if legalHour == 0 && legalMinute == 0{
-      legalHours.text = "\(legalHour) Hours"
-      legalMinutes.text = "\(legalMinute) Minutes"
-      legalTimer.invalidate()
+    let timeNow = NSDate()
+    if legalTimeEnd.compare(timeNow) == NSComparisonResult.OrderedDescending{
+      let calendar = NSCalendar.currentCalendar()
+      let components = calendar.components([.Hour, .Minute, .Second], fromDate: timeNow, toDate: legalTimeEnd, options: [])
+      
+      let hourText  = String(components.hour)
+      let minuteText = String(components.minute)
+      let notification = UILocalNotification()
+      notification.fireDate = NSDate(timeIntervalSinceNow: legalHours*60*60)
+      notification.alertBody = "You should now be legal to drive"
+      notification.alertAction = "unlock"
+      notification.soundName = UILocalNotificationDefaultSoundName
+      notification.userInfo = ["CustomField1": "w00t"]
+      UIApplication.sharedApplication().scheduleLocalNotification(notification)
+      legalTimerLabel.text = hourText + " Hours" + minuteText + "Minutes"
+    } else {
+      legalTimerLabel.text = "0 Hours 0 Minutes"
     }
   }
   /*
