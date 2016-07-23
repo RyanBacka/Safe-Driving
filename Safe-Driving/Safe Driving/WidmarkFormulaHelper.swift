@@ -17,7 +17,7 @@ class WidmarkHelper {
   // Calculates the BAC of the user without the time factor 
   static func calculate(alcPercent: Float, drinkVolume: Float, gender: String, bodyWeight: Float) -> Float{
     var r = Float()
-    let alcContent = alcPercent * 100
+    let alcContent = alcPercent / 100
     let totalGrams = drinkVolume * 29.57
     let gOfAlcohol = alcContent * totalGrams * 0.789
     

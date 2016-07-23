@@ -22,6 +22,12 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
   let searchController = UISearchController(searchResultsController: nil)
   var searchActive = false
   var filtered:[String] = []
+  var drinkData = [NSManagedObject]()
+  var profileData = [NSManagedObject]()
+  var drinkName:[String] = []
+  var differentDrinks = 0
+  var aC = Float()
+  var vol = Float()
   
   @IBOutlet weak var searchTableView: UITableView!
   
@@ -40,6 +46,31 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     drinkLabel2.hidden = true
     drinkSlider2.hidden = true
     drinkCountLabel2.hidden = true
+    
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let managedContext = appDelegate.managedObjectContext
+    let drinkFetchRequest = NSFetchRequest(entityName: "Drink")
+    let profileFetchRequest = NSFetchRequest(entityName: "Profile")
+    
+    do{
+      let results = try managedContext.executeFetchRequest(profileFetchRequest)
+      profileData = results as! [NSManagedObject]
+      print(profileData)
+    } catch let error as NSError {
+      print("Could not fetch \(error), \(error.userInfo)")
+    }
+    
+    do{
+      let results = try managedContext.executeFetchRequest(drinkFetchRequest)
+      drinkData = results as! [NSManagedObject]
+      print(drinkData)
+    } catch let error as NSError {
+      print("Could not fetch \(error), \(error.userInfo)")
+    }
+    
+    for item in drinkData {
+      drinkName.append(item.valueForKey("name") as! String)
+    }
   }
   
   override func didReceiveMemoryWarning() {
@@ -65,7 +96,18 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
   }
   
   func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-    <#code#>
+    filtered = drinkName.filter({ (text) -> Bool in
+      let tmp: NSString = text
+      let range  = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+      return range.location != NSNotFound
+    })
+    
+    if filtered.count == 0 {
+      searchActive = false
+    } else {
+      searchActive = true
+    }
+  self.searchTableView.reloadData()
   }
   
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -73,11 +115,42 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
   }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    <#code#>
+    if searchActive == true {
+      return filtered.count
+    } else {
+      return drinkData.count
+    }
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    <#code#>
+    let cell = tableView.dequeueReusableCellWithIdentifier("Cell")! as UITableViewCell
+    if searchActive == true {
+      cell.textLabel?.text = filtered[indexPath.row]
+    } else {
+      cell.textLabel?.text = drinkName[indexPath.row]
+    }
+    
+    return cell
+  }
+  
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    searchTableView.hidden = true
+    drinkLabel1.hidden = false
+    drinkSlider1.hidden = false
+    drinkCountLabel1.hidden = false
+    differentDrinks = differentDrinks + 1
+    if differentDrinks == 1 {
+      let drink = drinkData[indexPath.row]
+      drinkLabel1.text = drink.valueForKey("name") as? String
+      if let alcCont = drink.valueForKey("alcoholPercent") as? Float {
+        aC = alcCont
+      }
+      if let volume = drink.valueForKey("volume") as? Float {
+        vol = volume
+      }
+      drinkCountLabel1.text = "\(WidmarkHelper.calculate(aC, drinkVolume: vol, gender: "male", bodyWeight: 320)-0.015)"
+      
+    }
   }
   
   @IBAction func addDrinkButton(sender: AnyObject) {

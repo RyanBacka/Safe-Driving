@@ -13,7 +13,6 @@ class DrinksVC: UIViewController {
   
   @IBOutlet weak var totalDrinks: UILabel! // label to show user selected amount of certain drink
   @IBOutlet weak var howManyDrinks: UISlider!
-  @IBOutlet weak var drinksLabel: UILabel!
   @IBOutlet weak var alcoholContent: UITextField!
   @IBOutlet weak var drinkName: UITextField!
   @IBOutlet weak var drinkVolume: UITextField!
@@ -24,11 +23,6 @@ class DrinksVC: UIViewController {
   var totalVolume = Float()
   var drinks = Int()
   var drinkData = [NSManagedObject]()
-  
-  //from profile
-  var age = Int()
-  var weight = Int()
-  var gender = String()
   
   override func viewDidLoad() {
     
@@ -87,7 +81,7 @@ class DrinksVC: UIViewController {
       alert.addAction(dismissAction)
       presentViewController(alert, animated: true, completion: nil)
     }
-    
+    drinkCD(drink, alcCont: alcCont, volume: volume)
   }
   
   // sets value of label based on the slider
@@ -115,6 +109,7 @@ class DrinksVC: UIViewController {
     }
   }
   
+
   
   /*
    // MARK: - Navigation
