@@ -13,6 +13,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
   
   
   
+  @IBOutlet weak var nameText: UITextField!
   @IBOutlet weak var weightText: UITextField!
   @IBOutlet weak var ageText: UITextField!
   @IBOutlet weak var genderSelection: UIPickerView!
@@ -33,7 +34,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     self.genderSelection.delegate = self
     self.genderSelection.dataSource = self
     
-    pickerData = ["Male", "Female"]
+    pickerData = ["", "Male", "Female"]
     
     
   }
@@ -65,11 +66,17 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     return pickerData[row]
   }
   
+  func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
+    gender = pickerData[row]
+  }
+  
   // adds alerts and sets values once the user is done entering information
   @IBAction func doneButton(sender: AnyObject) {
+    if let userName = nameText.text{
+      name = userName
+    }
     
     if let userWeight = weightText.text{
-      print("here")
       if let weight = Int(userWeight){
         currentWeight = weight
       } else {
@@ -143,6 +150,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
    // Pass the selected object to the new view controller.
     let destinationVC = segue.destinationViewController as! ForecastVC
     destinationVC.profileName = name
+    destinationVC.profileGender = gender
+    destinationVC.profileWeight = Float(currentWeight)
    }
  
 }

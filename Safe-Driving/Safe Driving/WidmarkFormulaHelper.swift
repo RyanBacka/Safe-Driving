@@ -21,9 +21,9 @@ class WidmarkHelper {
     let totalGrams = drinkVolume * 29.57
     let gOfAlcohol = alcContent * totalGrams * 0.789
     
-    if gender == "male" {
+    if gender == "Male" {
       r = (bodyWeight / 0.0022046) * 0.68
-    } else if gender == "female" {
+    } else if gender == "Female" {
       r = (bodyWeight / 0.0022046) * 0.55
     }
     

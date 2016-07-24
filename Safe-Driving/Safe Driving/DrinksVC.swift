@@ -22,7 +22,6 @@ class DrinksVC: UIViewController {
   var volume = Float()
   var totalVolume = Float()
   var drinks = Int()
-  var profileName = String()
   let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
   
   

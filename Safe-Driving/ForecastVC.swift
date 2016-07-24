@@ -18,6 +18,7 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
   @IBOutlet weak var drinkLabel2: UILabel!
   @IBOutlet weak var drinkSlider2: UISlider!
   @IBOutlet weak var drinkCountLabel2: UILabel!
+  @IBOutlet weak var forecastSwitch: UISwitch!
   
   let searchController = UISearchController(searchResultsController: nil)
   var searchActive = false
@@ -29,7 +30,11 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
   var aC = Float()
   var vol = Float()
   var profileName = String()
+  var profileGender = String()
+  var profileWeight = Float()
   var selectedDrink = String()
+  var drink1Amount = Int()
+  var drink2Amount = Int()
   
   @IBOutlet weak var searchTableView: UITableView!
   
@@ -160,7 +165,7 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
       if let volume = drink.valueForKey("volume") as? Float {
         vol = volume
       }
-      drinkCountLabel1.text = "\(WidmarkHelper.calculate(aC, drinkVolume: vol, gender: "male", bodyWeight: 320)-0.015)"
+      print(profileGender)
     } else if differentDrinks == 2 {
       let drink = drinkData[indexPath.row]
       drinkLabel2.text = drink.valueForKey("name") as? String
@@ -170,18 +175,31 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
       if let volume = drink.valueForKey("volume") as? Float {
         vol = volume
       }
-      drinkCountLabel2.text = "\(WidmarkHelper.calculate(aC, drinkVolume: vol, gender: "male", bodyWeight: 320)-0.015)"
     }
   }
   
-  @IBAction func addDrinkButton(sender: AnyObject) {
+  @IBAction func slider1Action(sender: AnyObject) {
+    drink1Amount = Int(drinkSlider1.value)
+    drinkCountLabel1.text = "\(drink1Amount)"
   }
   
-  @IBAction func checkBacButton(sender: AnyObject) {
-    
+  @IBAction func slider2Action(sender: AnyObject) {
+    drink2Amount = Int(drinkSlider2.value)
+    drinkCountLabel2.text = "\(drink2Amount)"
   }
-  
-  
+  @IBAction func switchAction(sender: AnyObject) {
+    if forecastSwitch.on{
+      forecastSwitch.setOn(true, animated: true)
+      let possibleBAC = WidmarkHelper.calculate(aC, drinkVolume: vol, gender: profileGender, bodyWeight: profileWeight)
+      let allowedBeforeIntox = 0.080000 / possibleBAC
+      drinkSlider1.value = Float(Int(allowedBeforeIntox))
+      drinkCountLabel1.text = "\(Int(allowedBeforeIntox))"
+    } else {
+      forecastSwitch.setOn(false, animated: true)
+      drinkCountLabel1.text = "0"
+      drinkSlider1.value = 0
+    }
+  }
    // MARK: - Navigation
    
    // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -190,8 +208,11 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
    // Pass the selected object to the new view controller.
     if (segue.identifier == "BACSegue"){
       let destinationVC = segue.destinationViewController as! BACVC
-      destinationVC.userName = profileName
-      destinationVC.chosenDrink = selectedDrink
+      destinationVC.profileWeight = profileWeight
+      destinationVC.profileGender = profileGender
+      destinationVC.drinkVolume = vol
+      destinationVC.drinkContent = aC
+      destinationVC.numOfDrinks = drinkSlider1.value
     }
    }
    

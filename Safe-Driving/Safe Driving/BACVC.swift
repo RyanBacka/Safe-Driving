@@ -15,44 +15,27 @@ class BACVC: UIViewController {
   @IBOutlet weak var legalTimerLabel: UILabel!
   @IBOutlet weak var soberTimerLabel: UILabel!
   
-  
-  var drinkData = [NSManagedObject]()
-  var profileData = [NSManagedObject]()
+  var drinkVolume = Float()
+  var drinkContent = Float()
+  var profileWeight = Float()
+  var profileGender = String()
+  var numOfDrinks = Float()
   var soberTimer = NSTimer()
   var legalTimer = NSTimer()
   var soberHours = Double()
   var legalHours = Double()
   var soberTimeEnd = NSDate()
   var legalTimeEnd = NSDate()
-  var userName = String()
-  var chosenDrink = String()
-  var numOfDrinks = Float()
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     // Do any additional setup after loading the view.
     
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    let managedContext = appDelegate.managedObjectContext
-    let drinkFetchRequest = NSFetchRequest(entityName: "Drink")
-    let profileFetchRequest = NSFetchRequest(entityName: "Profile")
+    //loads core data then inserts into bac function
     
-    do{
-      let results = try managedContext.executeFetchRequest(profileFetchRequest)
-      profileData = results as! [NSManagedObject]
-    } catch let error as NSError {
-      print("Could not fetch \(error), \(error.userInfo)")
-    }
-    
-    do{
-      let results = try managedContext.executeFetchRequest(drinkFetchRequest)
-      drinkData = results as! [NSManagedObject]
-    } catch let error as NSError {
-      print("Could not fetch \(error), \(error.userInfo)")
-    }
-    
-    calcBAC(drinkData, profileData: profileData)
+    calcBAC(drinkVolume, drinkAlc: drinkContent, howMany: numOfDrinks, profileLbs: profileWeight, profileSex: profileGender)
   }
   
   override func didReceiveMemoryWarning() {
@@ -60,37 +43,32 @@ class BACVC: UIViewController {
     // Dispose of any resources that can be recreated.
   }
   
-  func calcBAC(drinkData : [NSManagedObject], profileData: [NSManagedObject]){
-    
-    let bodyAC = WidmarkHelper.calculate(4.2, drinkVolume: 1, gender: "male", bodyWeight: 320)
+  //calculates the BAC and calls the functions for timers
+  func calcBAC(drinkVol: Float, drinkAlc: Float, howMany: Float, profileLbs: Float, profileSex: String){
+    let totalVolume = drinkVol * howMany
+    print(drinkVol)
+    print(howMany)
+    print(profileLbs)
+    print(profileSex)
+    let bodyAC = WidmarkHelper.calculate(drinkAlc, drinkVolume: totalVolume, gender: profileSex, bodyWeight: profileLbs)
+    print(bodyAC)
     let BAC = bodyAC - 0.00025
     if BAC >= 0.00{
       BACLabel.text = "\(BAC)"
       soberHours = Double(BAC / 0.015)
-      /*soberHour = Int(hourDecimal)
-       let minutesDecimal = hourDecimal - Float(soberHour)
-       soberMinute = Int(minutesDecimal * 60)*/
       updateSoberTime()
     } else if BAC >= 0.08 {
       let legalBAC = BAC - 0.08
       legalHours = Double(legalBAC / 0.015)
-      /*legalHour = Int(hourDecimal)
-       let minutesDecimal = hourDecimal - Float(legalHour)
-       legalMinute = Int(minutesDecimal * 60)*/
       updateLegalTime()
     }
   }
   
+  //sets the timers and local alerts for sober level
   func updateSoberTime(){
     soberTimeEnd = NSDate(timeInterval: soberHours*60*60, sinceDate: NSDate())
     subtractSoberTime()
     soberTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(BACVC.subtractSoberTime), userInfo: nil, repeats: true)
-  }
-  
-  func updateLegalTime(){
-    legalTimeEnd = NSDate(timeInterval:legalHours*60*60, sinceDate: NSDate())
-    subtractLegalTime()
-    legalTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(BACVC.subtractLegalTime), userInfo: nil, repeats: true)
   }
   
   func subtractSoberTime(){
@@ -111,6 +89,13 @@ class BACVC: UIViewController {
     } else {
       soberTimerLabel.text = "0 Hours 0 Minutes"
     }
+  }
+  
+  //sets the timers and Local Alerts for legal level
+  func updateLegalTime(){
+    legalTimeEnd = NSDate(timeInterval:legalHours*60*60, sinceDate: NSDate())
+    subtractLegalTime()
+    legalTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(BACVC.subtractLegalTime), userInfo: nil, repeats: true)
   }
   
   func subtractLegalTime(){
