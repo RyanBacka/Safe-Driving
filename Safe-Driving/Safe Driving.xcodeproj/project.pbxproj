@@ -23,7 +23,6 @@
 		2CED897E1D45374000CADD85 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED897A1D45374000CADD85 /* Profile.swift */; };
 		2CED897F1D45374000CADD85 /* Drink+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED897B1D45374000CADD85 /* Drink+CoreDataProperties.swift */; };
 		2CED89801D45374000CADD85 /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED897C1D45374000CADD85 /* Drink.swift */; };
-		2CED89821D45539000CADD85 /* DrinkClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED89811D45539000CADD85 /* DrinkClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,7 +66,6 @@
 		2CED897A1D45374000CADD85 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Profile.swift; path = ../Profile.swift; sourceTree = "<group>"; };
 		2CED897B1D45374000CADD85 /* Drink+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Drink+CoreDataProperties.swift"; path = "../Drink+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CED897C1D45374000CADD85 /* Drink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Drink.swift; path = ../Drink.swift; sourceTree = "<group>"; };
-		2CED89811D45539000CADD85 /* DrinkClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrinkClass.swift; path = "Safe Driving/DrinkClass.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +96,6 @@
 		2C76E5ED1D244A1400A59D61 = {
 			isa = PBXGroup;
 			children = (
-				2CED89811D45539000CADD85 /* DrinkClass.swift */,
 				2C76E5F81D244A1400A59D61 /* Safe Driving */,
 				2C76E6101D244A1500A59D61 /* Safe DrivingTests */,
 				2C76E61B1D244A1500A59D61 /* Safe DrivingUITests */,
@@ -302,7 +299,6 @@
 				2CED897F1D45374000CADD85 /* Drink+CoreDataProperties.swift in Sources */,
 				2CED89801D45374000CADD85 /* Drink.swift in Sources */,
 				2CA7474A1D33CA7A00AF87A9 /* DrinksVC.swift in Sources */,
-				2CED89821D45539000CADD85 /* DrinkClass.swift in Sources */,
 				2C76E5FA1D244A1400A59D61 /* AppDelegate.swift in Sources */,
 				2C2ECA0D1D3E82E5005420BB /* ForecastVC.swift in Sources */,
 				2C2ECA091D3E7528005420BB /* WidmarkFormulaHelper.swift in Sources */,

@@ -187,6 +187,8 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     drink2Amount = Int(drinkSlider2.value)
     drinkCountLabel2.text = "\(drink2Amount)"
   }
+  
+  // lets the user choose if they want to see how many they can drink before over the legal limit
   @IBAction func switchAction(sender: AnyObject) {
     if forecastSwitch.on{
       forecastSwitch.setOn(true, animated: true)
@@ -200,6 +202,7 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
       drinkSlider1.value = 0
     }
   }
+  
    // MARK: - Navigation
    
    // In a storyboard-based application, you will often want to do a little preparation before navigation

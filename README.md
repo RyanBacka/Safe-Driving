@@ -1,3 +1,3 @@
 # Safe-Driving
-An application that calculates your BAC and estimates if you are safe to drive or need to find another way home.It Has the profile and add drink screens completed and looks to be ready on time even though I am a little behind on the search feature.
+This application allows you to determine your bac and know how soon you will be sober or can drive. It also forecasts how many of a drink you can have before going over the legal limit and sends a local notification when you are below the legal lime and when BAC is 0.0.
 
