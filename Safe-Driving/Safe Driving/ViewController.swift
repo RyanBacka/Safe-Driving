@@ -27,6 +27,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    initialAlert()
     let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
     UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
     self.genderSelection.delegate = self
@@ -34,7 +35,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     pickerData = ["Male", "Female"]
     
-    initialAlert()
+    
   }
   
   override func didReceiveMemoryWarning() {
@@ -66,6 +67,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
   
   // adds alerts and sets values once the user is done entering information
   @IBAction func doneButton(sender: AnyObject) {
+    
     if let userWeight = weightText.text{
       print("here")
       if let weight = Int(userWeight){
@@ -109,16 +111,16 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
   func profileCD(name: String, age: Float, weight: Float, gender: String){
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let managedContext = appDelegate.managedObjectContext
-    let entity =  NSEntityDescription.entityForName("Profile", inManagedObjectContext:managedContext)
-    let newProfile = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+    let entity =  NSEntityDescription.insertNewObjectForEntityForName("Profile", inManagedObjectContext: managedContext) 
     
-    newProfile.setValue(name, forKey: "name")
-    newProfile.setValue(weight, forKey: "weight")
-    newProfile.setValue(age, forKey: "age")
-    newProfile.setValue(gender, forKey: "gender")
+    
+    entity.setValue(name, forKey: "name")
+    entity.setValue(weight, forKey: "weight")
+    entity.setValue(age, forKey: "age")
+    entity.setValue(gender, forKey: "gender")
     do {
       try managedContext.save()
-      profileData.append(newProfile)
+      profileData.append(entity)
     } catch let error as NSError  {
       print("Could not save \(error), \(error.userInfo)")
     }
@@ -131,5 +133,17 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     alert.addAction(okAction)
     presentViewController(alert, animated: true, completion: nil)
   }
+  
+  
+   // MARK: - Navigation
+   
+   // In a storyboard-based application, you will often want to do a little preparation before navigation
+   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+   // Get the new view controller using segue.destinationViewController.
+   // Pass the selected object to the new view controller.
+    let destinationVC = segue.destinationViewController as! ForecastVC
+    destinationVC.profileName = name
+   }
+ 
 }
 

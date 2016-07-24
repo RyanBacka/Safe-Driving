@@ -22,11 +22,14 @@ class DrinksVC: UIViewController {
   var volume = Float()
   var totalVolume = Float()
   var drinks = Int()
-  var drinkData = [NSManagedObject]()
+  var profileName = String()
+  let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+  
   
   override func viewDidLoad() {
     
     // Do any additional setup after loading the view.
+    
   }
   
   override func didReceiveMemoryWarning() {
@@ -81,7 +84,8 @@ class DrinksVC: UIViewController {
       alert.addAction(dismissAction)
       presentViewController(alert, animated: true, completion: nil)
     }
-    drinkCD(drink, alcCont: alcCont, volume: volume)
+    drinkCD(alcCont, name: drink, volume: volume)
+    self.dismissViewControllerAnimated(true, completion: nil)
   }
   
   // sets value of label based on the slider
@@ -91,19 +95,16 @@ class DrinksVC: UIViewController {
   }
   
   // sets new drink in coreData
-  func drinkCD(name: String, alcCont: Float, volume: Float){
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+  func drinkCD(alcCont: Float, name: String, volume: Float){
     let managedContext = appDelegate.managedObjectContext
-    let entity =  NSEntityDescription.entityForName("Drink", inManagedObjectContext:managedContext)
-    let newDrink = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+    let entity =  NSEntityDescription.insertNewObjectForEntityForName("Drink", inManagedObjectContext: managedContext) as! Drink
     
-    newDrink.setValue(name, forKey: "name")
-    newDrink.setValue(alcCont, forKey: "alcoholPercent")
-    newDrink.setValue(volume, forKey: "volume")
+    entity.setValue(alcCont, forKey: "alcoholPercent")
+    entity.setValue(name, forKey: "name")
+    entity.setValue(volume, forKey: "volume")
     
     do {
       try managedContext.save()
-      drinkData.append(newDrink)
     } catch let error as NSError  {
       print("Could not save \(error), \(error.userInfo)")
     }
@@ -111,14 +112,18 @@ class DrinksVC: UIViewController {
   
 
   
-  /*
+ /*
    // MARK: - Navigation
    
    // In a storyboard-based application, you will often want to do a little preparation before navigation
    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
    // Get the new view controller using segue.destinationViewController.
    // Pass the selected object to the new view controller.
+    if (segue.identifier == "BACSegue"){
+      let destinationVC = segue.destinationViewController as! BACVC
+      destinationVC.userName = profileName
+    }
    }
-   */
+  */
   
 }

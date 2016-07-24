@@ -28,6 +28,8 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
   var differentDrinks = 0
   var aC = Float()
   var vol = Float()
+  var profileName = String()
+  var selectedDrink = String()
   
   @IBOutlet weak var searchTableView: UITableView!
   
@@ -47,6 +49,7 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     drinkSlider2.hidden = true
     drinkCountLabel2.hidden = true
     
+    //loads Core Data
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let managedContext = appDelegate.managedObjectContext
     let drinkFetchRequest = NSFetchRequest(entityName: "Drink")
@@ -55,7 +58,6 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     do{
       let results = try managedContext.executeFetchRequest(profileFetchRequest)
       profileData = results as! [NSManagedObject]
-      print(profileData)
     } catch let error as NSError {
       print("Could not fetch \(error), \(error.userInfo)")
     }
@@ -63,7 +65,6 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     do{
       let results = try managedContext.executeFetchRequest(drinkFetchRequest)
       drinkData = results as! [NSManagedObject]
-      print(drinkData)
     } catch let error as NSError {
       print("Could not fetch \(error), \(error.userInfo)")
     }
@@ -78,14 +79,17 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     // Dispose of any resources that can be recreated.
   }
   
+  // checks to see if the user began editing the search
   func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
     searchTableView.hidden = false
     searchActive = true
   }
   
+  // checks to see if the user finished editing the search
   func searchBarTextDidEndEditing(searchBar: UISearchBar) {
     searchActive = false
   }
+  
   
   func searchBarCancelButtonClicked(searchBar: UISearchBar) {
     searchActive = false
@@ -95,6 +99,7 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     searchActive = false
   }
   
+  // searches through items
   func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
     filtered = drinkName.filter({ (text) -> Bool in
       let tmp: NSString = text
@@ -110,10 +115,12 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
   self.searchTableView.reloadData()
   }
   
+  // sets the sections for the UITableView
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     return 1
   }
   
+  // sets the rows for the UITableView
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if searchActive == true {
       return filtered.count
@@ -122,6 +129,7 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     }
   }
   
+  // shows the items found in the UITableView
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("Cell")! as UITableViewCell
     if searchActive == true {
@@ -133,6 +141,7 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     return cell
   }
   
+  //handles the selection of a search item
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     searchTableView.hidden = true
     drinkLabel1.hidden = false
@@ -142,6 +151,9 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     if differentDrinks == 1 {
       let drink = drinkData[indexPath.row]
       drinkLabel1.text = drink.valueForKey("name") as? String
+      if let chosen = drinkLabel1.text{
+        selectedDrink = chosen
+      }
       if let alcCont = drink.valueForKey("alcoholPercent") as? Float {
         aC = alcCont
       }
@@ -149,7 +161,16 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         vol = volume
       }
       drinkCountLabel1.text = "\(WidmarkHelper.calculate(aC, drinkVolume: vol, gender: "male", bodyWeight: 320)-0.015)"
-      
+    } else if differentDrinks == 2 {
+      let drink = drinkData[indexPath.row]
+      drinkLabel2.text = drink.valueForKey("name") as? String
+      if let alcCont = drink.valueForKey("alcoholPercent") as? Float {
+        aC = alcCont
+      }
+      if let volume = drink.valueForKey("volume") as? Float {
+        vol = volume
+      }
+      drinkCountLabel2.text = "\(WidmarkHelper.calculate(aC, drinkVolume: vol, gender: "male", bodyWeight: 320)-0.015)"
     }
   }
   
@@ -157,16 +178,22 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
   }
   
   @IBAction func checkBacButton(sender: AnyObject) {
+    
   }
   
-  /*
+  
    // MARK: - Navigation
    
    // In a storyboard-based application, you will often want to do a little preparation before navigation
    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
    // Get the new view controller using segue.destinationViewController.
    // Pass the selected object to the new view controller.
+    if (segue.identifier == "BACSegue"){
+      let destinationVC = segue.destinationViewController as! BACVC
+      destinationVC.userName = profileName
+      destinationVC.chosenDrink = selectedDrink
+    }
    }
-   */
+   
   
 }

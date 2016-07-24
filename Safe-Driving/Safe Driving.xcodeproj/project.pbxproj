@@ -13,12 +13,16 @@
 		2C76E5FA1D244A1400A59D61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76E5F91D244A1400A59D61 /* AppDelegate.swift */; };
 		2C76E5FC1D244A1400A59D61 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76E5FB1D244A1400A59D61 /* ViewController.swift */; };
 		2C76E5FF1D244A1400A59D61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C76E5FD1D244A1400A59D61 /* Main.storyboard */; };
-		2C76E6021D244A1400A59D61 /* Safe_Driving.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C76E6001D244A1400A59D61 /* Safe_Driving.xcdatamodeld */; };
 		2C76E6041D244A1500A59D61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C76E6031D244A1500A59D61 /* Assets.xcassets */; };
 		2C76E6071D244A1500A59D61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C76E6051D244A1500A59D61 /* LaunchScreen.storyboard */; };
 		2C76E6121D244A1500A59D61 /* Safe_DrivingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76E6111D244A1500A59D61 /* Safe_DrivingTests.swift */; };
 		2C76E61D1D244A1500A59D61 /* Safe_DrivingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76E61C1D244A1500A59D61 /* Safe_DrivingUITests.swift */; };
 		2CA7474A1D33CA7A00AF87A9 /* DrinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA747491D33CA7A00AF87A9 /* DrinksVC.swift */; };
+		2CED896C1D4533FA00CADD85 /* Safe_Driving.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2CED896A1D4533FA00CADD85 /* Safe_Driving.xcdatamodeld */; };
+		2CED897D1D45374000CADD85 /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED89791D45374000CADD85 /* Profile+CoreDataProperties.swift */; };
+		2CED897E1D45374000CADD85 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED897A1D45374000CADD85 /* Profile.swift */; };
+		2CED897F1D45374000CADD85 /* Drink+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED897B1D45374000CADD85 /* Drink+CoreDataProperties.swift */; };
+		2CED89801D45374000CADD85 /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED897C1D45374000CADD85 /* Drink.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +50,6 @@
 		2C76E5F91D244A1400A59D61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C76E5FB1D244A1400A59D61 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2C76E5FE1D244A1400A59D61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		2C76E6011D244A1400A59D61 /* Safe_Driving.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Safe_Driving.xcdatamodel; sourceTree = "<group>"; };
 		2C76E6031D244A1500A59D61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C76E6061D244A1500A59D61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C76E6081D244A1500A59D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -58,6 +61,11 @@
 		2C76E61E1D244A1500A59D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2CA747481D33C39300AF87A9 /* Safe Driving.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Safe Driving.entitlements"; sourceTree = "<group>"; };
 		2CA747491D33CA7A00AF87A9 /* DrinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinksVC.swift; sourceTree = "<group>"; };
+		2CED896B1D4533FA00CADD85 /* Safe_Driving.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Safe_Driving.xcdatamodel; sourceTree = "<group>"; };
+		2CED89791D45374000CADD85 /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Profile+CoreDataProperties.swift"; path = "../Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2CED897A1D45374000CADD85 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Profile.swift; path = ../Profile.swift; sourceTree = "<group>"; };
+		2CED897B1D45374000CADD85 /* Drink+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Drink+CoreDataProperties.swift"; path = "../Drink+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2CED897C1D45374000CADD85 /* Drink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Drink.swift; path = ../Drink.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,11 +123,15 @@
 				2CA747491D33CA7A00AF87A9 /* DrinksVC.swift */,
 				2C2ECA0C1D3E82E5005420BB /* ForecastVC.swift */,
 				2C2ECA0E1D429D71005420BB /* BACVC.swift */,
+				2CED897C1D45374000CADD85 /* Drink.swift */,
+				2CED897A1D45374000CADD85 /* Profile.swift */,
+				2CED897B1D45374000CADD85 /* Drink+CoreDataProperties.swift */,
+				2CED89791D45374000CADD85 /* Profile+CoreDataProperties.swift */,
 				2C76E5FD1D244A1400A59D61 /* Main.storyboard */,
 				2C76E6031D244A1500A59D61 /* Assets.xcassets */,
 				2C76E6051D244A1500A59D61 /* LaunchScreen.storyboard */,
 				2C76E6081D244A1500A59D61 /* Info.plist */,
-				2C76E6001D244A1400A59D61 /* Safe_Driving.xcdatamodeld */,
+				2CED896A1D4533FA00CADD85 /* Safe_Driving.xcdatamodeld */,
 			);
 			path = "Safe Driving";
 			sourceTree = "<group>";
@@ -284,11 +296,15 @@
 			files = (
 				2C76E5FC1D244A1400A59D61 /* ViewController.swift in Sources */,
 				2C2ECA0F1D429D71005420BB /* BACVC.swift in Sources */,
+				2CED897F1D45374000CADD85 /* Drink+CoreDataProperties.swift in Sources */,
+				2CED89801D45374000CADD85 /* Drink.swift in Sources */,
 				2CA7474A1D33CA7A00AF87A9 /* DrinksVC.swift in Sources */,
 				2C76E5FA1D244A1400A59D61 /* AppDelegate.swift in Sources */,
 				2C2ECA0D1D3E82E5005420BB /* ForecastVC.swift in Sources */,
 				2C2ECA091D3E7528005420BB /* WidmarkFormulaHelper.swift in Sources */,
-				2C76E6021D244A1400A59D61 /* Safe_Driving.xcdatamodeld in Sources */,
+				2CED897D1D45374000CADD85 /* Profile+CoreDataProperties.swift in Sources */,
+				2CED897E1D45374000CADD85 /* Profile.swift in Sources */,
+				2CED896C1D4533FA00CADD85 /* Safe_Driving.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,11 +448,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Safe Driving/Safe Driving.entitlements";
 				INFOPLIST_FILE = "Safe Driving/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.RyanBacka.Safe-Driving";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -444,6 +462,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Safe Driving/Safe Driving.entitlements";
 				INFOPLIST_FILE = "Safe Driving/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -540,12 +559,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		2C76E6001D244A1400A59D61 /* Safe_Driving.xcdatamodeld */ = {
+		2CED896A1D4533FA00CADD85 /* Safe_Driving.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				2C76E6011D244A1400A59D61 /* Safe_Driving.xcdatamodel */,
+				2CED896B1D4533FA00CADD85 /* Safe_Driving.xcdatamodel */,
 			);
-			currentVersion = 2C76E6011D244A1400A59D61 /* Safe_Driving.xcdatamodel */;
+			currentVersion = 2CED896B1D4533FA00CADD85 /* Safe_Driving.xcdatamodel */;
 			path = Safe_Driving.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

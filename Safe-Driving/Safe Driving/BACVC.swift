@@ -24,6 +24,9 @@ class BACVC: UIViewController {
   var legalHours = Double()
   var soberTimeEnd = NSDate()
   var legalTimeEnd = NSDate()
+  var userName = String()
+  var chosenDrink = String()
+  var numOfDrinks = Float()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -38,7 +41,6 @@ class BACVC: UIViewController {
     do{
       let results = try managedContext.executeFetchRequest(profileFetchRequest)
       profileData = results as! [NSManagedObject]
-      print(profileData)
     } catch let error as NSError {
       print("Could not fetch \(error), \(error.userInfo)")
     }
@@ -46,7 +48,6 @@ class BACVC: UIViewController {
     do{
       let results = try managedContext.executeFetchRequest(drinkFetchRequest)
       drinkData = results as! [NSManagedObject]
-      print(drinkData)
     } catch let error as NSError {
       print("Could not fetch \(error), \(error.userInfo)")
     }
@@ -102,10 +103,9 @@ class BACVC: UIViewController {
       let minuteText = String(components.minute)
       let notification = UILocalNotification()
       notification.fireDate = NSDate(timeIntervalSinceNow: soberHours*60*60)
-      notification.alertBody = "You should now be sober"
+      notification.alertBody = "All alcohol should be out of your system"
       notification.alertAction = "unlock"
       notification.soundName = UILocalNotificationDefaultSoundName
-      notification.userInfo = ["CustomField1": "w00t"]
       UIApplication.sharedApplication().scheduleLocalNotification(notification)
       soberTimerLabel.text = hourText + " Hours " + minuteText + " Minutes "
     } else {
@@ -123,10 +123,9 @@ class BACVC: UIViewController {
       let minuteText = String(components.minute)
       let notification = UILocalNotification()
       notification.fireDate = NSDate(timeIntervalSinceNow: legalHours*60*60)
-      notification.alertBody = "You should now be legal to drive"
+      notification.alertBody = "You should now be below the legal limit to drive"
       notification.alertAction = "unlock"
       notification.soundName = UILocalNotificationDefaultSoundName
-      notification.userInfo = ["CustomField1": "w00t"]
       UIApplication.sharedApplication().scheduleLocalNotification(notification)
       legalTimerLabel.text = hourText + " Hours" + minuteText + "Minutes"
     } else {

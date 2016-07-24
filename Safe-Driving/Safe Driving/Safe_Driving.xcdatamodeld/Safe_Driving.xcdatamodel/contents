@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Automatic">
-    <entity name="Drink" syncable="YES">
+    <entity name="Drink" representedClassName=".Drink" syncable="YES">
         <attribute name="alcoholPercent" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="volume" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
     </entity>
-    <entity name="Profile" syncable="YES">
-        <attribute name="age" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    <entity name="Profile" representedClassName=".Profile" syncable="YES">
+        <attribute name="age" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="weight" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="weight" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Profile" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="Drink" positionX="-54" positionY="18" width="128" height="90"/>
+        <element name="Profile" positionX="-54" positionY="-9" width="128" height="105"/>
+        <element name="Drink" positionX="-18" positionY="54" width="128" height="90"/>
     </elements>
 </model>
