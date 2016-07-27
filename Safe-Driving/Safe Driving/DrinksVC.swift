@@ -12,7 +12,6 @@ import CoreData
 class DrinksVC: UIViewController {
   
   @IBOutlet weak var totalDrinks: UILabel! // label to show user selected amount of certain drink
-  @IBOutlet weak var howManyDrinks: UISlider!
   @IBOutlet weak var alcoholContent: UITextField!
   @IBOutlet weak var drinkName: UITextField!
   @IBOutlet weak var drinkVolume: UITextField!
@@ -20,7 +19,6 @@ class DrinksVC: UIViewController {
   var drink = String()
   var alcCont = Float()
   var volume = Float()
-  var totalVolume = Float()
   var drinks = Int()
   let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
   
@@ -59,7 +57,6 @@ class DrinksVC: UIViewController {
     if let vol = drinkVolume.text{
       if let drinkVol = Float(vol){
         volume = drinkVol
-        totalVolume = howManyDrinks.value * volume
       } else {
         //alert user to enter a number
         let alert = UIAlertController(title: "Alert", message: "Please enter a number in oz per drink", preferredStyle: .Alert)
@@ -87,10 +84,8 @@ class DrinksVC: UIViewController {
     self.dismissViewControllerAnimated(true, completion: nil)
   }
   
-  // sets value of label based on the slider
-  @IBAction func drinkSlider(sender: UISlider) {
-    drinks = Int(howManyDrinks.value)
-    totalDrinks.text = "\(drinks)"
+  @IBAction func userFinishedEditing(sender: AnyObject){
+    view.endEditing(true)
   }
   
   // sets new drink in coreData

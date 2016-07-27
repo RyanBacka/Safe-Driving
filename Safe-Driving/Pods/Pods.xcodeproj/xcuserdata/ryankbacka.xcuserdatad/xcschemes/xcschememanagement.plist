@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>ObjectMapper.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Safe Driving.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Safe DrivingTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Safe DrivingUITests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>UberRides.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>010C51805DE23B80ABD45260F02E353A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>563DC69393ECC3AE77BBF5E2354C1D63</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>75C3DFBF29CDB2B897390B264A68444B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>950D9E77E0AF6DC78B4C8EAC3704C1D0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D5D6200D4BE741574DBD4FB768A6F55B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

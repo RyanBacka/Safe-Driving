@@ -1,0 +1,6 @@
+framework module Pods_Safe_DrivingTests {
+  umbrella header "Pods-Safe DrivingTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

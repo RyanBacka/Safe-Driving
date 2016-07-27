@@ -1,0 +1,21 @@
+# Uncomment this line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'Safe Driving' do
+  # Comment this line if you're not using Swift and don't want to use dynamic frameworks
+  pod 'UberRides'
+  use_frameworks!
+
+  # Pods for Safe Driving
+
+  target 'Safe DrivingTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'Safe DrivingUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

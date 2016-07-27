@@ -19,6 +19,8 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
   @IBOutlet weak var drinkSlider2: UISlider!
   @IBOutlet weak var drinkCountLabel2: UILabel!
   @IBOutlet weak var forecastSwitch: UISwitch!
+  @IBOutlet var legalLimitLabels: [UILabel]!
+
   
   let searchController = UISearchController(searchResultsController: nil)
   var searchActive = false
@@ -53,6 +55,10 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     drinkLabel2.hidden = true
     drinkSlider2.hidden = true
     drinkCountLabel2.hidden = true
+    forecastSwitch.hidden = true
+    for item in legalLimitLabels{
+      item.hidden = true
+    }
     
     //loads Core Data
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -117,7 +123,7 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     } else {
       searchActive = true
     }
-  self.searchTableView.reloadData()
+    self.searchTableView.reloadData()
   }
   
   // sets the sections for the UITableView
@@ -145,6 +151,11 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     return cell
   }
+
+  @IBAction func userTappedBackground(sender: AnyObject){
+    searchTableView.hidden = true
+    searchBar.endEditing(true)
+  }
   
   //handles the selection of a search item
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -152,6 +163,10 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     drinkLabel1.hidden = false
     drinkSlider1.hidden = false
     drinkCountLabel1.hidden = false
+    for items in legalLimitLabels{
+      items.hidden = false
+    }
+    forecastSwitch.hidden = false
     differentDrinks = differentDrinks + 1
     if differentDrinks == 1 {
       let drink = drinkData[indexPath.row]
@@ -165,7 +180,6 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
       if let volume = drink.valueForKey("volume") as? Float {
         vol = volume
       }
-      print(profileGender)
     } else if differentDrinks == 2 {
       let drink = drinkData[indexPath.row]
       drinkLabel2.text = drink.valueForKey("name") as? String
@@ -194,21 +208,22 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
       forecastSwitch.setOn(true, animated: true)
       let possibleBAC = WidmarkHelper.calculate(aC, drinkVolume: vol, gender: profileGender, bodyWeight: profileWeight)
       let allowedBeforeIntox = 0.080000 / possibleBAC
-      drinkSlider1.value = Float(Int(allowedBeforeIntox))
+      drinkSlider1.hidden = true
       drinkCountLabel1.text = "\(Int(allowedBeforeIntox))"
     } else {
       forecastSwitch.setOn(false, animated: true)
       drinkCountLabel1.text = "0"
+      drinkSlider1.hidden = false
       drinkSlider1.value = 0
     }
   }
   
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-   // Get the new view controller using segue.destinationViewController.
-   // Pass the selected object to the new view controller.
+  // MARK: - Navigation
+  
+  // In a storyboard-based application, you will often want to do a little preparation before navigation
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     if (segue.identifier == "BACSegue"){
       let destinationVC = segue.destinationViewController as! BACVC
       destinationVC.profileWeight = profileWeight
@@ -217,7 +232,7 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
       destinationVC.drinkContent = aC
       destinationVC.numOfDrinks = drinkSlider1.value
     }
-   }
-   
+  }
+  
   
 }

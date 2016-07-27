@@ -46,10 +46,6 @@ class BACVC: UIViewController {
   //calculates the BAC and calls the functions for timers
   func calcBAC(drinkVol: Float, drinkAlc: Float, howMany: Float, profileLbs: Float, profileSex: String){
     let totalVolume = drinkVol * howMany
-    print(drinkVol)
-    print(howMany)
-    print(profileLbs)
-    print(profileSex)
     let bodyAC = WidmarkHelper.calculate(drinkAlc, drinkVolume: totalVolume, gender: profileSex, bodyWeight: profileLbs)
     print(bodyAC)
     let BAC = bodyAC - 0.00025
@@ -57,7 +53,8 @@ class BACVC: UIViewController {
       BACLabel.text = "\(BAC)"
       soberHours = Double(BAC / 0.015)
       updateSoberTime()
-    } else if BAC >= 0.08 {
+    }
+    if BAC >= 0.08 {
       let legalBAC = BAC - 0.08
       legalHours = Double(legalBAC / 0.015)
       updateLegalTime()
@@ -112,7 +109,7 @@ class BACVC: UIViewController {
       notification.alertAction = "unlock"
       notification.soundName = UILocalNotificationDefaultSoundName
       UIApplication.sharedApplication().scheduleLocalNotification(notification)
-      legalTimerLabel.text = hourText + " Hours" + minuteText + "Minutes"
+      legalTimerLabel.text = hourText + " Hours " + minuteText + "Minutes"
     } else {
       legalTimerLabel.text = "0 Hours 0 Minutes"
     }

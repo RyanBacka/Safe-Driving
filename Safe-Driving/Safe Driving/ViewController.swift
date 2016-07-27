@@ -8,10 +8,9 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 
-class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-  
-  
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, CLLocationManagerDelegate {
   
   @IBOutlet weak var nameText: UITextField!
   @IBOutlet weak var weightText: UITextField!
@@ -24,6 +23,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
   var gender = String()
   var name = String()
   var profileData = [NSManagedObject]()
+  let locationManager = CLLocationManager()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -34,14 +34,25 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     self.genderSelection.delegate = self
     self.genderSelection.dataSource = self
     
+    if CLLocationManager.authorizationStatus() == .NotDetermined {
+      locationManager.requestAlwaysAuthorization()
+    }
+    
+    locationManager.delegate = self
+    locationManager.requestAlwaysAuthorization()
+    
     pickerData = ["", "Male", "Female"]
-    
-    
   }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
+  }
+  
+  func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    if status == .AuthorizedAlways || status == .AuthorizedWhenInUse {
+      locationManager.stopUpdatingLocation()
+    }
   }
   
   // sets components in PickerView
@@ -114,6 +125,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     profileCD(name, age: Float(currentAge), weight: Float(currentWeight), gender: gender)
   }
   
+  @IBAction func userFinishedEditing(sender: AnyObject){
+    view.endEditing(true)
+  }
   //assigns values to coreData for later use
   func profileCD(name: String, age: Float, weight: Float, gender: String){
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate

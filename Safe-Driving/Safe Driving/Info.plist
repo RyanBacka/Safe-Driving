@@ -42,5 +42,62 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>uberPrivacyPolicy</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>Safe-Driving</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.RyanBacka.Safe-Driving</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>Safe-Driving</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>uberSSO</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>Safe-Driving</string>
+			</array>
+		</dict>
+	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>uber</string>
+		<string>uberauth</string>
+	</array>
+	<key>UberClientID</key>
+	<string>CO-80ESAnipwu39xnQhjfflBJp7GZZRG</string>
+	<key>UberDisplayName</key>
+	<string>Safe Driving</string>
+	<key>UberCallbackURIs</key>
+	<array>
+		<dict>
+			<key>UberCallbackURIType</key>
+			<string></string>
+			<key>URIString</key>
+			<string>Safe-Driving://uberSSO</string>
+		</dict>
+		<dict>
+			<key>UberCallbackURIType</key>
+			<string>General</string>
+			<key>URIString</key>
+			<string>Safe-Driving://com.RyanBacka.Safe-Driving</string>
+		</dict>
+	</array>
 </dict>
 </plist>

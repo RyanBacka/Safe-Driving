@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import UberRides
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,10 +17,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    // Override point for customization after application launch.
+    RidesAppDelegate.sharedInstance.application(application, didFinishLaunchingWithOptions: launchOptions)
+    // China based apps should specify the region
+    Configuration.setRegion(.Default)
+    // If true, all requests will hit the sandbox, useful for testing
+    Configuration.setSandboxEnabled(true)
+    // If true, Native login will try and fallback to using Authorization Code Grant login (for privileged scopes). Otherwise will redirect to App store
+    Configuration.setFallbackEnabled(false)
+    // Complete other setup
     return true
   }
 
+  @available(iOS 9, *)
+  func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+    
+    let handledURL = RidesAppDelegate.sharedInstance.application(app, openURL: url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String, annotation: options[UIApplicationOpenURLOptionsAnnotationKey])
+    
+    if (!handledURL) {
+      // Other URL parsing logic
+    }
+    
+    return true
+  }
+  
+  func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+    let handledURL = RidesAppDelegate.sharedInstance.application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+    
+    if (!handledURL) {
+      // Other URL parsing logic
+    }
+    
+    return true
+  }
+  
   func applicationWillResignActive(application: UIApplication) {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -82,6 +112,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
       return coordinator
   }()
+  
+
 
   lazy var managedObjectContext: NSManagedObjectContext = {
       // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
