@@ -17,36 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    RidesAppDelegate.sharedInstance.application(application, didFinishLaunchingWithOptions: launchOptions)
+    
     // China based apps should specify the region
-    Configuration.setRegion(.Default)
+    //Configuration.setRegion(.China)
     // If true, all requests will hit the sandbox, useful for testing
     Configuration.setSandboxEnabled(true)
     // If true, Native login will try and fallback to using Authorization Code Grant login (for privileged scopes). Otherwise will redirect to App store
-    Configuration.setFallbackEnabled(false)
-    // Complete other setup
-    return true
-  }
-
-  @available(iOS 9, *)
-  func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
-    
-    let handledURL = RidesAppDelegate.sharedInstance.application(app, openURL: url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String, annotation: options[UIApplicationOpenURLOptionsAnnotationKey])
-    
-    if (!handledURL) {
-      // Other URL parsing logic
-    }
-    
-    return true
-  }
-  
-  func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-    let handledURL = RidesAppDelegate.sharedInstance.application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
-    
-    if (!handledURL) {
-      // Other URL parsing logic
-    }
-    
+    RidesAppDelegate.sharedInstance.application(application, didFinishLaunchingWithOptions: launchOptions)
     return true
   }
   
@@ -137,6 +114,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
               abort()
           }
       }
+  }
+  
+  // Mark: - Uber
+  
+  @available(iOS 9, *)
+  func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+    
+    let handledURL = RidesAppDelegate.sharedInstance.application(app, openURL: url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String, annotation: options[UIApplicationOpenURLOptionsAnnotationKey])
+    
+    if (!handledURL) {
+      // Other URL parsing logic
+    }
+    
+    return true
+  }
+  
+  func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+    let handledUberURL = RidesAppDelegate.sharedInstance.application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+    
+    return handledUberURL
   }
 
 }

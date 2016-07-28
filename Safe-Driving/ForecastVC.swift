@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate{
   
   @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var drinkLabel1: UILabel!
@@ -37,6 +37,9 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
   var selectedDrink = String()
   var drink1Amount = Int()
   var drink2Amount = Int()
+  var newDrinkName = String()
+  var newDrinkAlc = Float()
+  var newDrinkVol = Float()
   
   @IBOutlet weak var searchTableView: UITableView!
   
@@ -60,6 +63,10 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
       item.hidden = true
     }
     
+    loadData()
+  }
+  
+  func loadData(){
     //loads Core Data
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let managedContext = appDelegate.managedObjectContext
@@ -94,6 +101,7 @@ class ForecastVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
   func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
     searchTableView.hidden = false
     searchActive = true
+    
   }
   
   // checks to see if the user finished editing the search

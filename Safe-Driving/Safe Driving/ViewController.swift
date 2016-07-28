@@ -28,15 +28,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
-    initialAlert()
+    //initialAlert()
     let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
     UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
     self.genderSelection.delegate = self
     self.genderSelection.dataSource = self
-    
-    if CLLocationManager.authorizationStatus() == .NotDetermined {
-      locationManager.requestAlwaysAuthorization()
-    }
     
     locationManager.delegate = self
     locationManager.requestAlwaysAuthorization()

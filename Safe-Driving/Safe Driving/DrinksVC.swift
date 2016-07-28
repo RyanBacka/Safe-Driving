@@ -114,8 +114,8 @@ class DrinksVC: UIViewController {
    // Get the new view controller using segue.destinationViewController.
    // Pass the selected object to the new view controller.
     if (segue.identifier == "BACSegue"){
-      let destinationVC = segue.destinationViewController as! BACVC
-      destinationVC.userName = profileName
+      let destinationVC = segue.destinationViewController as! ForecastVC
+      
     }
    }
   */
