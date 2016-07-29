@@ -50,6 +50,16 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
+			<string>com.RyanBacka.Safe-DrivingLyft</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>Safe-Driving</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
 			<string>uberPrivacyPolicy</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
@@ -90,7 +100,7 @@
 	<array>
 		<dict>
 			<key>UberCallbackURIType</key>
-			<string></string>
+			<string>Native</string>
 			<key>URIString</key>
 			<string>Safe-Driving://uberSSO</string>
 		</dict>

@@ -19,7 +19,6 @@
 		2C76E6121D244A1500A59D61 /* Safe_DrivingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76E6111D244A1500A59D61 /* Safe_DrivingTests.swift */; };
 		2C76E61D1D244A1500A59D61 /* Safe_DrivingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76E61C1D244A1500A59D61 /* Safe_DrivingUITests.swift */; };
 		2CA7474A1D33CA7A00AF87A9 /* DrinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA747491D33CA7A00AF87A9 /* DrinksVC.swift */; };
-		2CE251871D4939D000D1FF01 /* UberButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE251861D4939D000D1FF01 /* UberButton.swift */; };
 		2CED896C1D4533FA00CADD85 /* Safe_Driving.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2CED896A1D4533FA00CADD85 /* Safe_Driving.xcdatamodeld */; };
 		2CED897D1D45374000CADD85 /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED89791D45374000CADD85 /* Profile+CoreDataProperties.swift */; };
 		2CED897E1D45374000CADD85 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED897A1D45374000CADD85 /* Profile.swift */; };
@@ -65,7 +64,6 @@
 		2C76E61E1D244A1500A59D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2CA747481D33C39300AF87A9 /* Safe Driving.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Safe Driving.entitlements"; sourceTree = "<group>"; };
 		2CA747491D33CA7A00AF87A9 /* DrinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinksVC.swift; sourceTree = "<group>"; };
-		2CE251861D4939D000D1FF01 /* UberButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UberButton.swift; sourceTree = "<group>"; };
 		2CED896B1D4533FA00CADD85 /* Safe_Driving.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Safe_Driving.xcdatamodel; sourceTree = "<group>"; };
 		2CED89791D45374000CADD85 /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Profile+CoreDataProperties.swift"; path = "../Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CED897A1D45374000CADD85 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Profile.swift; path = ../Profile.swift; sourceTree = "<group>"; };
@@ -148,7 +146,6 @@
 				2CA747481D33C39300AF87A9 /* Safe Driving.entitlements */,
 				2C2ECA081D3E7528005420BB /* WidmarkFormulaHelper.swift */,
 				2C76E5F91D244A1400A59D61 /* AppDelegate.swift */,
-				2CE251861D4939D000D1FF01 /* UberButton.swift */,
 				2C76E5FB1D244A1400A59D61 /* ViewController.swift */,
 				2C2ECA0C1D3E82E5005420BB /* ForecastVC.swift */,
 				2CA747491D33CA7A00AF87A9 /* DrinksVC.swift */,
@@ -473,7 +470,6 @@
 				2CED897F1D45374000CADD85 /* Drink+CoreDataProperties.swift in Sources */,
 				2CED89801D45374000CADD85 /* Drink.swift in Sources */,
 				2CA7474A1D33CA7A00AF87A9 /* DrinksVC.swift in Sources */,
-				2CE251871D4939D000D1FF01 /* UberButton.swift in Sources */,
 				2C76E5FA1D244A1400A59D61 /* AppDelegate.swift in Sources */,
 				2C2ECA0D1D3E82E5005420BB /* ForecastVC.swift in Sources */,
 				2C2ECA091D3E7528005420BB /* WidmarkFormulaHelper.swift in Sources */,

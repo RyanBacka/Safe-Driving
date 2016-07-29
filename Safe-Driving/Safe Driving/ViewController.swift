@@ -31,6 +31,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     //initialAlert()
     let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
     UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
+    
     self.genderSelection.delegate = self
     self.genderSelection.dataSource = self
     

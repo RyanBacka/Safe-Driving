@@ -13,23 +13,14 @@ import CoreLocation
 
 // Mark: LoginButtonDelegate
 
-public func loginButton(button: LoginButton, didLogoutWithSuccess success: Bool) {
-  // success is true if logout succeeded, false otherwise
-}
 
-public func loginButton(button: LoginButton, didCompleteLoginWithToken accessToken: AccessToken?, error: NSError?) {
-  if let _ = accessToken {
-    // AccessToken Saved
-  } else if let error = error {
-    // An error occured
-  }
-}
 
-class BACVC: UIViewController {
+class BACVC: UIViewController, CLLocationManagerDelegate {
   
   @IBOutlet weak var BACLabel: UILabel!
   @IBOutlet weak var legalTimerLabel: UILabel!
   @IBOutlet weak var soberTimerLabel: UILabel!
+  @IBOutlet weak var BACView: UIView!
   
   var drinkVolume = Float()
   var drinkContent = Float()
@@ -42,57 +33,41 @@ class BACVC: UIViewController {
   var legalHours = Double()
   var soberTimeEnd = NSDate()
   var legalTimeEnd = NSDate()
-  
-  let scopes: [RidesScope]
-  let loginManager: LoginManager
-  let blackLoginButton: LoginButton
-  let whiteLoginButton: LoginButton
-  
-  
+  let locationManager = CLLocationManager()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     // Do any additional setup after loading the view.
     
+    locationManager.delegate = self
+    locationManager.requestAlwaysAuthorization()
     //loads core data then inserts into bac function
     
     calcBAC(drinkVolume, drinkAlc: drinkContent, howMany: numOfDrinks, profileLbs: profileWeight, profileSex: profileGender)
     
-    // for Uber
-    let scopes = [.Profile, .Places, .Request]
-    let loginManager = LoginManager(loginType: .Native)
-    let loginButton = LoginButton(frame: CGRectZero, scopes: scopes, loginManager: loginManager)
-    loginButton.presentingViewController = self
-    loginButton.delegate = self
-    view.addSubview(loginButton)
-    
-    var button = RideRequestButton()
-    let ridesClient = RidesClient()
-    let pickupLocation = CLLocation(latitude: 37.787654, longitude: -122.402760)
-    let dropoffLocation = CLLocation(latitude: 37.775200, longitude: -122.417587)
-    var builder = RideParametersBuilder().setPickupLocation(pickupLocation).setDropoffLocation(dropoffLocation)
-    ridesClient.fetchCheapestProduct(pickupLocation: pickupLocation, completion: {
-      product, response in
-      if let productID = product?.productID {
-        builder = builder.setProductID(productID)
-        button.rideParameters = builder.build()
-        button.loadRideInformation()
-      }
-    })
-    
-    // Pass in a UIViewController to modally present the Ride Request Widget over
     let behavior = RideRequestViewRequestingBehavior(presentingViewController: self)
-    // Optional, defaults to using the user’s current location for pickup
     let location = CLLocation(latitude: 37.787654, longitude: -122.402760)
     let parameters = RideParametersBuilder().setPickupLocation(location).build()
-    button = RideRequestButton(rideParameters: parameters, requestingBehavior: behavior)
-    self.view.addSubview(button)
+    let uberButton = RideRequestButton(rideParameters: parameters, requestingBehavior: behavior)
+    uberButton.translatesAutoresizingMaskIntoConstraints = false
+    self.BACView.addSubview(uberButton)
+    
+    let horizontalConstraint = NSLayoutConstraint(item: uberButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: BACView, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+    let verticalConstraint = NSLayoutConstraint(item: uberButton, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: BACView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.4, constant: 0)
+    BACView.addConstraint(horizontalConstraint)
+    BACView.addConstraint(verticalConstraint)
   }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
+  }
+  
+  func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    if status == .AuthorizedAlways || status == .AuthorizedWhenInUse {
+      locationManager.stopUpdatingLocation()
+    }
   }
   
   //calculates the BAC and calls the functions for timers
