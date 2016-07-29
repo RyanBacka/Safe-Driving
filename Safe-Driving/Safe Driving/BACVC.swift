@@ -92,6 +92,12 @@ class BACVC: UIViewController, CLLocationManagerDelegate {
   func updateSoberTime(){
     soberTimeEnd = NSDate(timeInterval: soberHours*60*60, sinceDate: NSDate())
     subtractSoberTime()
+    let notification = UILocalNotification()
+    notification.fireDate = NSDate(timeIntervalSinceNow: soberHours*60*60)
+    notification.alertBody = "All alcohol should be out of your system"
+    notification.alertAction = "unlock"
+    notification.soundName = UILocalNotificationDefaultSoundName
+    UIApplication.sharedApplication().scheduleLocalNotification(notification)
     soberTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(BACVC.subtractSoberTime), userInfo: nil, repeats: true)
   }
   
@@ -103,12 +109,7 @@ class BACVC: UIViewController, CLLocationManagerDelegate {
       
       let hourText  = String(components.hour)
       let minuteText = String(components.minute)
-      let notification = UILocalNotification()
-      notification.fireDate = NSDate(timeIntervalSinceNow: soberHours*60*60)
-      notification.alertBody = "All alcohol should be out of your system"
-      notification.alertAction = "unlock"
-      notification.soundName = UILocalNotificationDefaultSoundName
-      UIApplication.sharedApplication().scheduleLocalNotification(notification)
+      
       soberTimerLabel.text = hourText + " Hours " + minuteText + " Minutes "
     } else {
       soberTimerLabel.text = "0 Hours 0 Minutes"
@@ -119,6 +120,12 @@ class BACVC: UIViewController, CLLocationManagerDelegate {
   func updateLegalTime(){
     legalTimeEnd = NSDate(timeInterval:legalHours*60*60, sinceDate: NSDate())
     subtractLegalTime()
+    let notification = UILocalNotification()
+    notification.fireDate = NSDate(timeIntervalSinceNow: legalHours*60*60)
+    notification.alertBody = "You should now be below the legal limit to drive"
+    notification.alertAction = "unlock"
+    notification.soundName = UILocalNotificationDefaultSoundName
+    UIApplication.sharedApplication().scheduleLocalNotification(notification)
     legalTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(BACVC.subtractLegalTime), userInfo: nil, repeats: true)
   }
   
@@ -130,12 +137,7 @@ class BACVC: UIViewController, CLLocationManagerDelegate {
       
       let hourText  = String(components.hour)
       let minuteText = String(components.minute)
-      let notification = UILocalNotification()
-      notification.fireDate = NSDate(timeIntervalSinceNow: legalHours*60*60)
-      notification.alertBody = "You should now be below the legal limit to drive"
-      notification.alertAction = "unlock"
-      notification.soundName = UILocalNotificationDefaultSoundName
-      UIApplication.sharedApplication().scheduleLocalNotification(notification)
+      
       legalTimerLabel.text = hourText + " Hours " + minuteText + "Minutes"
     } else {
       legalTimerLabel.text = "0 Hours 0 Minutes"

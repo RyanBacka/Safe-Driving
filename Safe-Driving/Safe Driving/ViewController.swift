@@ -159,10 +159,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
    // Get the new view controller using segue.destinationViewController.
    // Pass the selected object to the new view controller.
+    if (segue.identifier == "ProfileSegue"){
     let destinationVC = segue.destinationViewController as! ForecastVC
     destinationVC.profileName = name
     destinationVC.profileGender = gender
     destinationVC.profileWeight = Float(currentWeight)
+    }
    }
  
 }
